@@ -7,37 +7,21 @@ from scrapy.linkextractors import LinkExtractor
 
 class KnifeSpider(scrapy.Spider):
     name = "knife_spider"
-    # allowed_domains = ["seisukeknife.com"]
-    # start_urls = ["https://int.seisukeknife.com/"]
+    allowed_domains = ["seisukeknife.com"]
+    start_urls = ["https://int.seisukeknife.com/collections/gyuto-chefs-knife"]
     # rules = (
     #     Rule(LinkExtractor(allow="/collections/gyuto-chefs-knife")),
     # )
-
-    start_urls = ["https://books.toscrape.com/"]
     
     def parse(self, response):
-        urls = response.css("img ::attr(src)").getall()
+        urls = response.css("div.product-item__wrapper div.product-item__image-wrapper div.height-inherit.has-secondary-image").css("a img::attr(data-src)").extract()
         results = []
         for url in  urls:
             url = response.urljoin(url)
-            # url = url.replace("{width}", "440")
+            url = url.replace("{width}", "440")
             results.append(url)
         yield {
-            "image_urls" : results
+            "image_urls" : results,
+            # "title": 
         }
 
-
-    # def parse(self, response):
-    #     urls = response.css("")
-        # urls = response.css("div.product-item__wrapper div.product-item__image-wrapper div.height-inherit.has-secondary-image").css("a img::attr(data-src)").extract()
-        # image_urls = []
-        # for url in  urls:
-        #     url = response.urljoin(url)
-        #     url = url.replace("{width}", "440")
-        #     print(url)
-        #     image_urls.append(url)
-        
-        #     yield {
-        #         "image_urls" : image_urls
-        #     }
-    # response.css("div.product-item__wrapper").css("div.product-item__image-wrapper").css("div.height-inherit.has-secondary-image").css("a.false img").attrib
