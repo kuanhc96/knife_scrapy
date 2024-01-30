@@ -17,14 +17,18 @@ class KnifeSpider(scrapy.Spider):
     
     def parse(self, response):
         urls = response.css("img ::attr(src)").getall()
-        results = []
         for url in  urls:
             url = response.urljoin(url)
             # url = url.replace("{width}", "440")
-            results.append(url)
-        yield {
-            "image_urls" : results
-        }
+            yield {
+                "image_urls" : [url]
+            }
+        
+        next_page = response.css("div div div div section div div ul li.next a::attr(href)").extract_first()
+        print("NEXT PAGE:: ", next_page)
+        if next_page:
+            next_page = response.urljoin(next_page)
+            yield scrapy.Request(url=next_page, callback=self.parse)
 
 
     # def parse(self, response):
