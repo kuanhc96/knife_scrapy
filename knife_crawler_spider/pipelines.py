@@ -5,9 +5,10 @@
 
 
 # useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
+from scrapy.pipelines.images import ImagesPipeline
 
-
-class KnifeCrawlerSpiderPipeline:
-    def process_item(self, item, spider):
-        return item
+counter = 0
+class KnifeCrawlerSpiderPipeline(ImagesPipeline):
+    def file_path(self, request, response=None, info=None):
+        counter = counter + 1
+        return counter
