@@ -11,13 +11,16 @@ class KnifeSpider(scrapy.Spider):
     start_urls = ["https://int.seisukeknife.com/collections/gyuto-chefs-knife"]
     
     def parse(self, response):
-        urls = response.css("div.product-item__wrapper div.product-item__image-wrapper div.height-inherit.has-secondary-image").css("a img::attr(data-src)").extract()
-        list_urls = []
+        urls = response.css("div.product-item__wrapper div.product-item__image-wrapper div.height-inherit.has-secondary-image").css("a img::attr(data-src)").getall()
         for url in  urls:
             url = response.urljoin(url)
             url = url.replace("{width}", "440")
-            list_urls.append(url)
-        yield {
-            "image_urls" : list_urls,
-        }
+            yield {
+                "image_urls" : [url],
+            }
+        
+        next_page = response.css("div div.main-content div.index-wrapper div.collection-wrapper section div div main div div.pagination-next a::attr(href)").extract_first()
+        if next_page:
+            next_page = response.urljoin(next_page)
+            yield scrapy.Request(url=next_page, callback=self.parse)
 
