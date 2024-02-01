@@ -1,4 +1,4 @@
-from knife_crawler_spider.items import KnifeCrawlerSpiderItem
+from knife_crawler_spider.items import KnifeImageItem
 import datetime
 import scrapy
 from scrapy.spiders import CrawlSpider, Rule
@@ -6,6 +6,10 @@ from scrapy.linkextractors import LinkExtractor
 # from production.items import ProductionItem, ImageItems
 
 class KnifeSpider(scrapy.Spider):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.counter = 0
+
     name = "knife_spider"
     # allowed_domains = ["seisukeknife.com"]
     # start_urls = ["https://int.seisukeknife.com/"]
@@ -20,12 +24,14 @@ class KnifeSpider(scrapy.Spider):
         for url in  urls:
             url = response.urljoin(url)
             # url = url.replace("{width}", "440")
-            yield {
-                "image_urls" : [url]
-            }
+            # yield {
+            #     "image_url" : url,
+            #     "title" : self.counter
+            # }
+            yield KnifeImageItem(image_url=url, title=self.counter)
+            self.counter = self.counter + 1
         
         next_page = response.css("div div div div section div div ul li.next a::attr(href)").extract_first()
-        print("NEXT PAGE:: ", next_page)
         if next_page:
             next_page = response.urljoin(next_page)
             yield scrapy.Request(url=next_page, callback=self.parse)
