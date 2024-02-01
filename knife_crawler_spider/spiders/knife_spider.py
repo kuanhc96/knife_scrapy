@@ -15,7 +15,7 @@ class KnifeSpider(scrapy.Spider):
         for url in  urls:
             url = response.urljoin(url)
             url = url.replace("{width}", "440")
-            KnifeImageItem(image_url=url, title=self.counter)
+            yield KnifeImageItem(image_url=url, title=self.counter)
             self.counter += 1
         
         next_page = response.css("div div.main-content div.index-wrapper div.collection-wrapper section div div main div div.pagination-next a::attr(href)").extract_first()
