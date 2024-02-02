@@ -11,3 +11,4 @@ class KnifeImageItem(scrapy.Item):
     title = scrapy.Field()
     image_url = scrapy.Field()
     image = scrapy.Field()
+    knife_type = scrapy.Field()
