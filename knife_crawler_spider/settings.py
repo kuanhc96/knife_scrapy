@@ -20,7 +20,7 @@ NEWSPIDER_MODULE = "knife_crawler_spider.spiders"
 ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 1
+# CONCURRENT_REQUESTS = 32
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -63,7 +63,7 @@ CONCURRENT_REQUESTS = 1
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    "knife_crawler_spider.pipelines.SerializeImagesPipeline": 1,
+    "knife_crawler_spider.pipelines.SortKnifeImagesPipeline": 1,
 }
 
 # ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1}
