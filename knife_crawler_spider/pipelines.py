@@ -14,12 +14,14 @@ class SerializeImagesPipeline(ImagesPipeline):
         # for image_url in item.get('image_urls', []):
         image_url = item.get('image_url')
         title = item.get('title', 'XXXXX')
-        yield Request(image_url, meta={'title': title})
+        knife_type = item.get('knife_type', 'misc')
+        yield Request(image_url, meta={'title': title, 'knife_type': knife_type})
 
     def file_path(self, request, response=None, info=None): # order of execution: 2nd
         title = request.meta.get('title', 'XXXXX')
+        knife_type = request.meta.get('knife_type', 'misc')
         filename = f"{str( title ).zfill(4)}.jpg"
-        return filename
+        return knife_type + "/" + filename
 
     def item_completed(self, results, item, info): # order of execution: 3rd
         results = results[0]
