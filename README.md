@@ -50,3 +50,5 @@ After running this program, the spider will create 11 folders with the aforement
 Then, the spider will automatically sort the knife images downloaded from Seisuke into the aforementioned 11 categories
 
 Happy slicing, cooking, crawling, and machine-learning!
+
+(PS. Not sure if anyone would care to see this, but here is my development diary for this [ project ](https://bow-dogwood-10f.notion.site/Webcrawler-Notes-a0c1c08e39fe4863859d81cde12ba348?pvs=4))
