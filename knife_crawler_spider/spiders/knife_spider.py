@@ -9,7 +9,17 @@ class KnifeSpider(scrapy.Spider):
     allowed_domains = ["seisukeknife.com"]
     start_urls = [
         "https://int.seisukeknife.com/collections/gyuto-chefs-knife",
-        "https://int.seisukeknife.com/collections/santoku-all-purpose-knives"
+        "https://int.seisukeknife.com/collections/santoku-all-purpose-knives",
+        "https://int.seisukeknife.com/collections/bunka-knife",
+        "https://int.seisukeknife.com/collections/nakiri-vegetable",
+        "https://int.seisukeknife.com/collections/petty-utility",
+        "https://int.seisukeknife.com/collections/paring-peeling-knives",
+        "https://int.seisukeknife.com/collections/sujihiki-slicer-knives",
+        "https://int.seisukeknife.com/collections/honesuki-boning-knife-1",
+        "https://int.seisukeknife.com/collections/yanagiba-fuguhiki-slicer",
+        "https://int.seisukeknife.com/collections/deba-butchery",
+        "https://int.seisukeknife.com/collections/usuba-mukimono"
+
     ]
     
     def parse(self, response):
