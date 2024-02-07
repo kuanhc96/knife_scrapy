@@ -18,7 +18,7 @@ class KnifeSpider(scrapy.Spider):
         "https://musashihamono.com/collections/japanese-chef-knife-gyuto-series",
         "https://musashihamono.com/collections/japanese-chef-knife-santoku-series",
         "https://musashihamono.com/collections/japanese-chef-knife-nakiri-series",
-        "https://musashihamono.com/collections/japanese-chef-knife-bunka-series",
+        "https://musashihamono.com/collections/japanese-chef-knife-deba-series",
     ]
 
     # Parse method for handling the response
@@ -37,7 +37,7 @@ class KnifeSpider(scrapy.Spider):
             yield KnifeImageItem(image_url=url, knife_type=knife_type)
 
         # Extract the URL of the next page
-        next_page = response.css("div div main div div div div div div div div div span a::attr(href)").extract_first()
+        next_page = response.css("div div main div div div div div div div div div span.next a::attr(href)").extract_first()
 
         # Check if there is a next page and send a request to it
         if next_page:
