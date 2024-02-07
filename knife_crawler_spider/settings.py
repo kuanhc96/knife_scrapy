@@ -93,4 +93,4 @@ ITEM_PIPELINES = {
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
-IMAGES_STORE = "<your path here>"
+IMAGES_STORE = "/Users/kuanhc96/Desktop/pyimagesearch/kitchen_knife_classifier/web_crawler/dataset/"
